@@ -1,7 +1,7 @@
 Fullstack TensorFlow
 ====================
 
-![alt Fullstack TensorFlow](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/winery.jpg)
+![alt Fullstack TensorFlow](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/winery.jpg)
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -18,7 +18,7 @@ This blog post is there to help you navigating your way in this *DevOps* jungle.
 
 The overall structure is going to be pretty much straight forward. We'll start with a basic setup, run the stack, and then I would like to demonstrate, how easy it is to tweak the code and redeploy it within a few single steps. The benefit is a shippable product from day *zero*, allowing you to spend less time on the structure and concentrate solely on the content. I will put more focus on delivery, automation and continuity rather than on designing the best neural network architecture mankind has ever known - which ain't gonna happen anyway, at least not with the data set I chose for this tutorial, yes you got it right, the most elementary chewed out data set in the universe - the one and only **MNIST**.
 
-The technology stack used in this entry consists mainly of the core `TensorFlow` frameworks: `Keras`, `TensorFlow Serving` and `TensorBoard` - with `Flask` and `Nginx` for *RESTifying* the API and `Docker` for deployment. The code is hosted on [github.com](https://github.com/ariellev/fullstack-tensor-flow) and completely available for you to download and experiment with.
+The technology stack used in this entry consists mainly of the core `TensorFlow` frameworks: `Keras`, `TensorFlow Serving` and `TensorBoard` - with `Flask` and `Nginx` for *RESTifying* the API and `Docker` for deployment. The code is hosted on [github.com](https://github.com/bfft/201809_techblog_fullstack_tensor_flow) and completely available for you to download and experiment with.
 
 One last point. The tutorial speaks mainly *Linux'ish*. Nevertheless I hope that windows users, also when not necessarily able to take advantage of the related scripts, can still benefit from the overall content. If installing a virtual machine is an option, then I would recommend one of two awesome products: [VMWare](https://my.vmware.com/en/web/vmware/free#desktop_end_user_computing/vmware_workstation_player/14_0) or [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 
@@ -61,9 +61,9 @@ Well done! You have just accomplished all the necessary steps needed to run the 
 
 ## Run the TensorFlow stack
 ### Build & push
-Now that we are capable of deploying the TensorFlow stack on localhost, let's clone the [fullstack-tensor-flow](https://github.com/ariellev/fullstack-tensor-flow.git) repository and proceed with the following commands
+Now that we are capable of deploying the TensorFlow stack on localhost, let's clone the [fullstack-tensor-flow](https://github.com/bfft/201809_techblog_fullstack_tensor_flow.git) repository and proceed with the following commands
 ```bash
-> git clone https://github.com/ariellev/fullstack-tensor-flow.git
+> git clone https://github.com/bfft/201809_techblog_fullstack_tensor_flow.git
 > cd fullstack-tensor-flow
 
 > export registry=localhost:5000
@@ -113,10 +113,10 @@ The `push-all-docker.sh` script created 4 new images:
 
 The diagram below depicts the overall architecture:
 
-![alt architecture](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/fullstack-tensor-flow.001.jpeg)
+![alt architecture](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/fullstack-tensor-flow.001.jpeg)
 
 ### Launch
-Having built the images we are set to move forward and launch them locally using **Docker Compose** - *"a tool for defining and running multi-container Docker applications."*<sup>[3](#docker-compose)</sup> But instead of calling `docker-compose` directly we will execute another wrapper script called `compose.sh`, which sets up a few environment variables before calling the underlying `docker-compose` command. Feel free to look into [.deploy/localhost-compose.yml](https://github.com/ariellev/fullstack-tensor-flow/blob/master/.deploy/localhost-compose.yml) to see the details regarding the configuration of the application.
+Having built the images we are set to move forward and launch them locally using **Docker Compose** - *"a tool for defining and running multi-container Docker applications."*<sup>[3](#docker-compose)</sup> But instead of calling `docker-compose` directly we will execute another wrapper script called `compose.sh`, which sets up a few environment variables before calling the underlying `docker-compose` command. Feel free to look into [.deploy/localhost-compose.yml](https://github.com/bfft/201809_techblog_fullstack_tensor_flow/blob/master/.deploy/localhost-compose.yml) to see the details regarding the configuration of the application.
 ```bash
 > compose.sh up -f .deploy/localhost-compose.yml
 
@@ -153,18 +153,18 @@ The services below, followed by their screenshots, are now accessible in your br
 
 <center><i>Jupyter Lab</i></center>
 
-![alt Juypter Lab](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/jupyter.png)
+![alt Juypter Lab](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/jupyter.png)
 
 <center><i>Tensor Board</i></center>
 
-![alt TensorBoard](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/tensor-board-0.png)
+![alt TensorBoard](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/tensor-board-0.png)
 
 <center><i>Interactive RESTful API with Swagger</i></center>
 
-![alt RESTful API](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/rest-1.png)
+![alt RESTful API](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/rest-1.png)
 
 ### Try it out!
-Open the [Swagger UI](http://localhost:8080/tf/#!/mnist/post_mnist) in your browser. In the `model` value field enter the name `mnist-net`. Next we need to upload a digit image for prediction. Inside the [tensor-rest/data/mnist](https://github.com/ariellev/fullstack-tensor-flow/tree/master/tensor-rest/data/mnist) folder in your repository you'll find 100 images I extracted in advance. The files are named with the following convention: `mnist_[N]_[id].jpg`, where `N = a digit from 0 to 9` and `id = some random string`, i.e. the prefix `mnist_2` implies an image of the digit `2` and so on. Finally click ```Try it out!``` and.. ***Voilà!***
+Open the [Swagger UI](http://localhost:8080/tf/#!/mnist/post_mnist) in your browser. In the `model` value field enter the name `mnist-net`. Next we need to upload a digit image for prediction. Inside the [tensor-rest/data/mnist](https://github.com/bfft/201809_techblog_fullstack_tensor_flow/tree/master/tensor-rest/data/mnist) folder in your repository you'll find 100 images I extracted in advance. The files are named with the following convention: `mnist_[N]_[id].jpg`, where `N = a digit from 0 to 9` and `id = some random string`, i.e. the prefix `mnist_2` implies an image of the digit `2` and so on. Finally click ```Try it out!``` and.. ***Voilà!***
 ```json
 {
   "classification_result": [
@@ -228,9 +228,9 @@ Let's return to our little [Swagger UI](http://localhost:8080/tf/#!/mnist/post_m
 
 ## TensorBoard
 If you look again into the training code @ `MnistNet.ipyb` you'll note, that the `model.fit` function is given a callback argument named `tensor_board`. This callback basically writes logs for `TensorBoard` to crunch, which in turn allows you to visualize dynamic graphs of your training and test metrics, as well as activation histograms for the different layers in your model. The logs are written to a folder called `/home/ml/logs`, which is just happened to be shared with the `tensor-board` container. You may open [TensorBoard](http://localhost:6006/) once again in your browser and recognize, that this time, the view is populated with all kinds of metrics:  
-![alt Scalars](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/tensor-board-1.png)
-![alt Activations](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/tensor-board-2.png)
-![alt Graph](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/tensor-board-3.png)
+![alt Scalars](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/tensor-board-1.png)
+![alt Activations](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/tensor-board-2.png)
+![alt Graph](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/tensor-board-3.png)
 
 We are mostly done with the basic part - you master essentially everything a *DevOps Tiger* has to know, in order to bring a trained neural network to production. So you may stop here if you wish to. Otherwise, if you still curious and want to discover some more about what actually happens under the hood, then the next part is all about revealing some more of the mystery.
 
@@ -241,8 +241,8 @@ The RESTful service running inside `tensor-rest` is developed with [Flask](http:
 
 The API exposed by `Flask` is merely an abstraction layer on top of `tensor-serving-cpu`. You may call it an adapter if you want, cause that what it actually does. HTTP Request flows in; it is then serialized using [gRPC](https://grpc.io/) ( more or less a byte array representation of a predefined domain model, that can be interpreted by the upstream server `TensorServing`); the payload is transmitted futher down the wire to `tensor-serving-cpu`; whose response gets converted back to HTTP containing a *JSONic* payload.
 
-If you want to take a look into the specifics of the implementation you may refert to [endpoints.py](https://github.com/ariellev/fullstack-tensor-flow/blob/master/tensor-rest/app/tf/api/mnist/endpoints.py) and
-[mnist_client.py](https://github.com/ariellev/fullstack-tensor-flow/blob/master/tensor-rest/app/tf/api/mnist/mnist_client.py)
+If you want to take a look into the specifics of the implementation you may refert to [endpoints.py](https://github.com/bfft/201809_techblog_fullstack_tensor_flow/blob/master/tensor-rest/app/tf/api/mnist/endpoints.py) and
+[mnist_client.py](https://github.com/bfft/201809_techblog_fullstack_tensor_flow/blob/master/tensor-rest/app/tf/api/mnist/mnist_client.py)
 
 ### Nginx
 Flask's default development server is not meant under any circumstances to be "client facing", as it does not scale well and by default serves only one request at a time. According to the official [documentation](http://flask.pocoo.org/docs/1.0/tutorial/deploy/#run-with-a-production-server):
@@ -293,7 +293,7 @@ The container orchestration market is highly saturated<sup>[4](#container-adopti
 And regarding the future.. well..  
 *Roll your sleeves up! Nail the services to the cloud and Good Luck!*
 
-![alt Cloud](https://raw.githubusercontent.com/ariellev/fullstack-tensor-flow/master/images/blah-blah-cloud.png)
+![alt Cloud](https://raw.githubusercontent.com/bfft/201809_techblog_fullstack_tensor_flow/master/images/blah-blah-cloud.png)
 
 ___
 <a name="private-registry">1. Depending on the version of your docker engine this step may be obsolete.</a>   
